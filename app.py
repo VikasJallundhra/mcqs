@@ -74,6 +74,9 @@ def generate_mcqs():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
+# if __name__ == '__main__':
+#     port = int(os.environ.get("PORT", 5000))  # Get the port assigned by Render
+#     app.run(host='0.0.0.0', port=port)  # Bind to all available network interfaces
+
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Get the port assigned by Render
-    app.run(host='0.0.0.0', port=port)  # Bind to all available network interfaces
+    app.run(debug=True)
