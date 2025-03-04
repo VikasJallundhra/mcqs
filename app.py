@@ -37,6 +37,13 @@ def generate_mcqs():
         - No long phrases or sentences.
         - Questions and answers should be concise and clear.
 
+        # If no text is provided, return the following JSON response:
+        
+        {{
+          "status": "error",
+          "message": "No input text provided. Please provide a text to generate MCQs."
+        }}
+
         Provide the output in **valid JSON format ONLY** with this structure:
 
         {{
