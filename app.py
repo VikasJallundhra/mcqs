@@ -3,6 +3,7 @@ import google.generativeai as genai
 import json
 import re  # To extract JSON safely
 import os
+import gunicorn
 
 app = Flask(__name__)
 
