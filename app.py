@@ -55,11 +55,11 @@ def generate_mcqs():
           "status": "success",
           "difficulty": "{difficulty}",
           "num_item": {num_item},
-          "questions": [
+          "mcqs": [
             {{
               "question": "Sample question?",
               "options": ["Option A", "Option B", "Option C", "Option D"],
-              "answer": "Correct answer"
+              "correctanswer": "Correct answer"
             }}
           ]
         }}
