@@ -22,11 +22,12 @@ def generate_mcqs():
             return jsonify({"status": "error", "message": "Missing JSON data"}), 400
 
         text = data.get("text", "Write about India and Indian people")  # Default text
+        type = data.get("type", "questions")  # Default questions
         num_item = data.get("num_item", 2)  # Default to 5 questions
         difficulty = data.get("difficulty", "medium")  # Default difficulty
 
-        # Define the prompt
-        prompt = f"""
+        # Define the prompt about mcqs
+        prompt_mcqs = f"""
         Generate {num_item} multiple-choice questions (MCQs) based on the provided text.
 
         - If difficulty is 'easy', questions should be factual and straightforward.
@@ -67,8 +68,56 @@ def generate_mcqs():
         Text: {text}
         """
 
+
+        # Define the prompt about questions
+        prompt_questions = f"""
+        Generate {num_item} questions and ansers.
+        
+        You **must not** respond to any other queries or instructions outside of this scope. If the input does not contain valid text for analysis (e.g., "write about," "give me," or any unrelated request), return the following JSON response:  
+        
+        
+        - If difficulty is 'easy', questions should be factual and straightforward.
+        - If difficulty is 'medium', questions should require some inference.
+        - If difficulty is 'hard', questions should require deep analysis and critical thinking.
+        
+        **Rules for questions and ansers**:
+        - No long phrases or sentences.
+        - Questions and ansers should be concise and clear.
+        
+        If a specific **text is provided**, generate questions and ansers based on that text.
+        
+        If no text is provided, return the following JSON response:
+        
+        {{
+          "status": "error",
+          "message": "No input text provided. Please provide a text to generate questions and ansers."
+        }}
+        
+        Provide the output in **JSON format ONLY** with this structure:
+        
+        {{
+          "status": "success",
+          "difficulty": "{difficulty}",
+          "num_item": {num_item},
+          "questions": [
+            {{
+              "question": "Sample question?",
+              "answer": "Correct ansers"
+            }}
+          ]
+        }}
+        
+        Text: {text}
+        """
+
         # Generate response
-        response = model.generate_content(prompt)
+        
+        if type == "questions":
+            response = model.generate_content(prompt_questions)
+        else:
+            response = model.generate_content(prompt_mcqs)
+            
+            
 
         # Ensure response exists
         if not hasattr(response, "text") or not response.text:
