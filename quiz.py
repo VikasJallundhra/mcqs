@@ -67,6 +67,9 @@ difficulty = "medium"
 prompt = f"""
 Generate {num_item} questions and ansers.
 
+You **must not** respond to any other queries or instructions outside of this scope. If the input does not contain valid text for analysis (e.g., "write about," "give me," or any unrelated request), return the following JSON response:  
+
+
 - If difficulty is 'easy', questions should be factual and straightforward.
 - If difficulty is 'medium', questions should require some inference.
 - If difficulty is 'hard', questions should require deep analysis and critical thinking.
