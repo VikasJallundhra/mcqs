@@ -9,7 +9,7 @@ def keep_awake():
             print("Server Pinged ✅")
         except Exception as e:
             print(f"Ping failed: {e}")
-        time.sleep(60)  # Ping every 10 minutes
+        time.sleep(10)  # Ping every 10 minutes
 
 # Start the self-pinging thread
 threading.Thread(target=keep_awake, daemon=True).start()
