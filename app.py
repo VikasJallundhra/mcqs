@@ -22,7 +22,7 @@ def generate_mcqs():
             return jsonify({"status": "error", "message": "Missing JSON data"}), 400
 
         text = data.get("text", "Write about India and Indian people")  # Default text
-        num_item = data.get("num_item", 5)  # Default to 5 questions
+        num_item = data.get("num_item", 2)  # Default to 5 questions
         difficulty = data.get("difficulty", "medium")  # Default difficulty
 
         # Define the prompt
